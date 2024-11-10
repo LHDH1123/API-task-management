@@ -15,5 +15,3 @@ router.patch("/edit/:id", controller.editPatch);
 router.patch("/delete-multi", controller.deleteMultiPatch);
 
 module.exports = router;
-
-

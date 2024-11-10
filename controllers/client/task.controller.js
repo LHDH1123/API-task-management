@@ -15,7 +15,7 @@ module.exports.index = async (req, res) => {
   }
 
   // Phân trang
-  let limitItems = 5;
+  let limitItems = 10;
   let page = 1;
   if (req.query.page) {
     page = parseInt(req.query.page);
