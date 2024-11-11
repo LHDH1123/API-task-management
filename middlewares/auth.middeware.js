@@ -22,6 +22,7 @@ module.exports.requireAuth = async (req, res, next) => {
   } else {
     res.json({
       code: 400,
+      message: "Vui lòng gởi kèm Token",
     });
   }
 };

@@ -49,7 +49,7 @@ module.exports.detail = async (req, res) => {
 module.exports.changeMultiPatch = async (req, res) => {
   const status = req.body.status;
   const ids = req.body.ids;
-  
+
   await Task.updateMany(
     {
       _id: { $in: ids },
@@ -65,14 +65,23 @@ module.exports.changeMultiPatch = async (req, res) => {
 };
 
 module.exports.createPost = async (req, res) => {
-  const data = req.body;
-  const task = new Task(data);
-  await task.save();
-  res.json({
-    code: "success",
-    message: "Tạo công việc thành công!",
-    data: task,
-  });
+  try {
+    req.body.createdBy = req.user.id;
+
+    const task = new Task(req.body);
+    await task.save();
+
+    res.json({
+      code: 200,
+      message: "Tạo công việc thành công!",
+      data: task,
+    });
+  } catch (error) {
+    res.json({
+      code: 400,
+      message: "Lỗi!",
+    });
+  }
 };
 
 module.exports.editPatch = async (req, res) => {
